@@ -32,21 +32,21 @@ CREATE TABLE `currency` (
 -- ----------------------------
 DROP TABLE IF EXISTS `deposit_history`;
 CREATE TABLE `deposit_history` (
-  `doposit_history_id` int(11) NOT NULL AUTO_INCREMENT,
+  `deposit_history_id` int(11) NOT NULL AUTO_INCREMENT,
   `deposit_id` int(11) NOT NULL,
   `opening_time` datetime DEFAULT NULL,
   `close_time` datetime DEFAULT NULL,
   `operation_operation_id` int(11) NOT NULL,
   `transaction_value` decimal(22,2) DEFAULT NULL,
   `deposit_historycol` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`doposit_history_id`,`deposit_id`,`operation_operation_id`)
+  PRIMARY KEY (`deposit_history_id`,`deposit_id`,`operation_operation_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for doposit
+-- Table structure for deposit
 -- ----------------------------
-DROP TABLE IF EXISTS `doposit`;
-CREATE TABLE `doposit` (
+DROP TABLE IF EXISTS `deposit`;
+CREATE TABLE `deposit` (
   `deposit_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `total` decimal(12,2) DEFAULT NULL COMMENT 'Сума депозиту',
