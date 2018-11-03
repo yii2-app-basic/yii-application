@@ -22,7 +22,8 @@ DROP TABLE IF EXISTS `currency`;
 CREATE TABLE `currency` (
   `currency_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
-  `rate` decimal(5,3) NOT NULL COMMENT 'Курс відносно долара',
+  `buy_rate` decimal(5,3) NOT NULL COMMENT 'Курс покупки відносно Гривні',
+  `selling_rate` decimal(5,3) NOT NULL COMMENT 'Курс продажі відносно Гривні',
   `abbreviation` varchar(3) NOT NULL COMMENT 'Абревіатура',
   PRIMARY KEY (`currency_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
