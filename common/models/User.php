@@ -8,19 +8,25 @@ use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
 /**
- * User model
+ * This is the model class for table "user".
  *
- * @property integer $id
+ * @property int $user_id
  * @property string $username
- * @property string $password_hash
- * @property string $password_reset_token
  * @property string $email
+ * @property string $password
+ * @property string $name Имя
+ * @property string $middle_name Отчество
+ * @property string $surname Фамилия
+ * @property int $telephone
+ * @property string $city
+ * @property string $address
  * @property string $auth_key
- * @property integer $status
- * @property integer $created_at
- * @property integer $updated_at
- * @property string $password write-only password
- */
+ * @property string $password_hash
+ * @property int $status
+ * @property string $password_reset_token
+ * @property int $updated_at
+ * @p
+*/
 class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
@@ -51,8 +57,11 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            ['status', 'default', 'value' => self::STATUS_ACTIVE],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            [['username',  'name', 'middle_name', 'surname', 'telephone', 'city', 'address', 'auth_key', 'password_hash'], 'required'],
+            [['telephone', 'status', 'updated_at', 'created_at'], 'integer'],
+            [['username',  'name', 'middle_name', 'surname', 'city', 'address', 'email'], 'string', 'max' => 45],
+            [['auth_key'], 'string', 'max' => 32],
+            [['password_hash', 'password_reset_token'], 'string', 'max' => 255],
         ];
     }
 
@@ -61,7 +70,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentity($id)
     {
-        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+        return static::findOne(['user_id' => $id, 'status' => self::STATUS_ACTIVE]);
     }
 
     /**
@@ -89,6 +98,11 @@ class User extends ActiveRecord implements IdentityInterface
      * @param string $token password reset token
      * @return static|null
      */
+
+    /**
+     * востановление пароля
+     */
+
     public static function findByPasswordResetToken($token)
     {
         if (!static::isPasswordResetTokenValid($token)) {
@@ -186,4 +200,6 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+
+
 }
