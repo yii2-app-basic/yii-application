@@ -39,11 +39,11 @@ AppAsset::register($this);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
         ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
+        ['label' => 'Счета', 'url' => ['/accounts/index']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => 'Регистрация', 'url' => ['/site/signup']];
+        $menuItems[] = ['label' => 'Авторизация', 'url' => ['/site/login']];
     } else {
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
@@ -70,8 +70,9 @@ AppAsset::register($this);
         <div class="sidebarLeft">
 
         </div>
-        <div class="content"></div>
+        <div class="content">
         <?= $content ?>
+        </div>
     </div>
 </div>
 </div>
@@ -107,6 +108,7 @@ AppAsset::register($this);
         .content{
             flex: 1;
             min-width: 0;
+            padding-left: 300px;
 
         }
         .box{

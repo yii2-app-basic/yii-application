@@ -28,6 +28,18 @@ CREATE TABLE `currency` (
   PRIMARY KEY (`currency_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+-- ----------------------------
+-- Table structure for types_of_accounts
+-- ----------------------------
+DROP TABLE IF EXISTS `types_of_accounts`;
+CREATE TABLE `types_of_accounts` (
+  `types_accounts_id` int(11) NOT NULL AUTO_INCREMENT,
+  `types_accounts_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`types_accounts_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 -- ----------------------------
 -- Table structure for deposit_history
 -- ----------------------------
@@ -37,9 +49,9 @@ CREATE TABLE `deposit_history` (
   `deposit_id` int(11) NOT NULL,
   `opening_time` datetime DEFAULT NULL,
   `close_time` datetime DEFAULT NULL,
-  `operation_operation_id` int(11) NOT NULL,
+  `operation_id` int(11) NOT NULL,
   `transaction_value` decimal(22,2) DEFAULT NULL,
-  `deposit_historycol` varchar(45) DEFAULT NULL,
+  `balance after transaction` decimal(22,2) DEFAULT NULL,
   PRIMARY KEY (`deposit_history_id`,`deposit_id`,`operation_operation_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -52,6 +64,7 @@ CREATE TABLE `deposit` (
   `user_id` int(11) NOT NULL,
   `total` decimal(12,2) DEFAULT NULL COMMENT 'Сума депозиту',
   `currency_id` int(11) NOT NULL,
+  `types_accounts_id` int(11) NOT NULL,
   `account_number` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`deposit_id`,`user_id`,`currency_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -62,8 +75,8 @@ CREATE TABLE `deposit` (
 DROP TABLE IF EXISTS `operation`;
 CREATE TABLE `operation` (
   `operation_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) DEFAULT NULL,
-  `is_allowed` tinyint(1) DEFAULT NULL,
+  `operation_name` varchar(45) DEFAULT NULL,
+  `is_allowed_operation` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`operation_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
